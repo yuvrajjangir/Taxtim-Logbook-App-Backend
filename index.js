@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const connection = require('./config/db');
 const cors = require("cors");
 const {userController} = require("./routes/user.route");
