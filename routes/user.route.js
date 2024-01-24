@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const {UserModel} = require("../model/authmodel");
 const {Router} = require("express");
 const userController = Router();
