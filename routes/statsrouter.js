@@ -1,14 +1,11 @@
-// Import necessary models
 const express = require('express');
-const {Router} = require("express");
-const statsRouter = Router();
-const Trip = require('../model/Tripmodel');
-const Expense = require('../model/expensemodel');
-const LogbookStats = require('../model/logbookstatsmodel');
-const verifyToken = require('../middleware/verifytoken'); 
+const StatsRouter = express.Router();
+const {TripModel} = require('../model/tripmodel');
+const {Expense} = require('../model/expensemodel');
+const {LogbookStats} = require("../model/logbookstatsmodel");
+const {verifyToken} = require("../middleware/verifytoken");
 
-
-statsRouter.get('/:year', verifyToken, async (req, res) => {
+StatsRouter.get('/:year', verifyToken, async (req, res) => {
     try {
       const requestedYear = parseInt(req.params.year);
       const trips = await Trip.find({});
@@ -90,4 +87,4 @@ statsRouter.get('/:year', verifyToken, async (req, res) => {
   
   
   
-module.exports = {statsRouter}
+module.exports = {StatsRouter};

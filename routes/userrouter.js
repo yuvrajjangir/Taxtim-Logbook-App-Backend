@@ -1,10 +1,10 @@
-const bcrypt = require("bcryptjs");
-const {UserModel} = require("../model/authmodel");
-const {Router} = require("express");
-const userController = Router();
+const express = require('express');
+const UserRouter = express.Router();
 const jwt = require("jsonwebtoken");
+const {UserModel} = require("../model/authmodel");
+const bcrypt = require("bcryptjs");
 
-userController.post("/signup", (req, res) => {
+UserRouter.post("/signup", (req, res) => {
     const {name, email, password} = req.body;
     bcrypt.hash(password, 10, async function(err, hash){
         if(err){
@@ -25,7 +25,7 @@ userController.post("/signup", (req, res) => {
     });
 })
 
-userController.post("/login", async (req, res) => {
+UserRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await UserModel.findOne({ email });
@@ -50,4 +50,4 @@ userController.post("/login", async (req, res) => {
     }
 });
 
-module.exports = {userController};
+module.exports = {UserRouter};

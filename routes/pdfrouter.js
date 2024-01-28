@@ -1,11 +1,10 @@
 const express = require('express');
 const PDFDocument = require('pdfkit');
-const LogbookStats = require('../model/logbookstatsmodel');
-const router = express.Router();
-const verifyToken = require('../middleware/verifytoken'); 
+const {LogbookStats} = require('../model/logbookstatsmodel');
+const PdfRouter = express.Router();
+const {verifyToken} = require("../middleware/verifytoken");
 
-
-router.get('/generate-pdf/:year',verifyToken, async (req, res) => {
+PdfRouter.get('/generate-pdf/:year',verifyToken, async (req, res) => {
     const year = parseInt(req.params.year);
   
     try {
@@ -40,5 +39,5 @@ router.get('/generate-pdf/:year',verifyToken, async (req, res) => {
       res.status(500).send('Error generating PDF');
     }
   });
-  
-  module.exports = router;
+
+  module.exports = {PdfRouter};
